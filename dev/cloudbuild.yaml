@@ -22,7 +22,12 @@ steps:
   - name: 'gcr.io/cloud-builders/gcloud'
     args: [ 'alpha', 'builds', 'triggers', 'run', '--branch=$BRANCH_NAME', 'cardano-node-iohk-slim' ]
 
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [ 'alpha', 'builds', 'triggers', 'run', '--branch=$BRANCH_NAME', 'cardano-py-slim' ]
+
 timeout: 3600s
+options:
+  machineType: 'N1_HIGHCPU_8'
 availableSecrets:
   secretManager:
     - versionName: projects/cardano-etl/secrets/docker-chbfiv/versions/1
