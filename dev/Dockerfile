@@ -8,11 +8,11 @@ ENV APP=/opt/cardano-node \
     USER=root \
     PATH=$HOME/scripts:/root/.cabal/bin:/root/.ghcup/bin:$PATH
 
-ARG _BRANCH=1.25.1
+ARG _VERSION=1.25.1
 
 ADD files .
 
-RUN git clone --depth 1 --branch $_BRANCH https://github.com/input-output-hk/cardano-node.git \
+RUN git clone --depth 1 --branch $_VERSION https://github.com/input-output-hk/cardano-node.git \
   && export BOOTSTRAP_HASKELL_NO_UPGRADE=1 \
   && cd cardano-node \
   && echo "package cardano-crypto-praos" > cabal.project.local \

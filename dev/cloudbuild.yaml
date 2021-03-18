@@ -1,6 +1,5 @@
 substitutions:
   _VERSION: 1.25.1 # default value
-  _BRANCH: 1.25.1 # default value
   _CONTAINER: "cardano-node-iohk-dev"
 steps:
   - name: 'gcr.io/cloud-builders/docker'
@@ -10,10 +9,9 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build',
-           '--build-arg', '_BRANCH=$_BRANCH',
+           '--build-arg', '_VERSION=$_VERSION',
            '--cache-from', 'floydcraft/$_CONTAINER:$_VERSION',
            '-t', 'floydcraft/$_CONTAINER:$COMMIT_SHA',
-           '-t', 'floydcraft/$_CONTAINER:$_BRANCH',
            '-t', 'floydcraft/$_CONTAINER:$_VERSION',
            'dev']
 
@@ -21,7 +19,7 @@ steps:
     args: ['image', 'push', 'floydcraft/$_CONTAINER']
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: [ 'alpha', 'builds', 'triggers', 'run', '--branch=$BRANCH_NAME', 'cardano-node-iohk-slim-$_VERSION' ]
+    args: [ 'alpha', 'builds', 'triggers', 'run', '--branch=$BRANCH_NAME', 'cardano-node-iohk-slim' ]
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args: [ 'alpha', 'builds', 'triggers', 'run', '--branch=$BRANCH_NAME', 'cardano-py-slim' ]
