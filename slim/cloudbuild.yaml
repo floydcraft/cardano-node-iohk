@@ -13,6 +13,7 @@ steps:
            '--cache-from', 'floydcraft/$_CONTAINER:$_VERSION',
            '-t', 'floydcraft/$_CONTAINER:$COMMIT_SHA',
            '-t', 'floydcraft/$_CONTAINER:$_VERSION',
+           '-t', 'floydcraft/$_CONTAINER:latest',
            'slim']
 
   - name: 'gcr.io/cloud-builders/docker'
