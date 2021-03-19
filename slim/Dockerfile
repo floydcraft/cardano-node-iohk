@@ -1,4 +1,6 @@
 ARG _VERSION=1.25.1
+FROM floydcraft/cardano-node-iohk-dev:$_VERSION as base
+
 FROM debian:buster-20210208-slim
 LABEL maintainer="chbfiv@floydcraft.com"
 
@@ -14,15 +16,15 @@ ENV ENV=/etc/profile \
 USER root
 WORKDIR /
 
-COPY --from=floydcraft/cardano-node-iohk-dev:latest /root/.cabal/bin/* /usr/local/bin/
-COPY --from=floydcraft/cardano-node-iohk-dev:latest /lib/x86_64-linux-gnu/lib* /lib/x86_64-linux-gnu/
-COPY --from=floydcraft/cardano-node-iohk-dev:latest /lib64/ld-linux-x86-64* /lib64/
-COPY --from=floydcraft/cardano-node-iohk-dev:latest /usr/lib/x86_64-linux-gnu/libgmp.* /usr/lib/x86_64-linux-gnu/
-COPY --from=floydcraft/cardano-node-iohk-dev:latest /usr/lib/x86_64-linux-gnu/liblz4.* /usr/lib/x86_64-linux-gnu/
-COPY --from=floydcraft/cardano-node-iohk-dev:latest /usr/lib/x86_64-linux-gnu/libsodium.* /usr/lib/x86_64-linux-gnu/
-COPY --from=floydcraft/cardano-node-iohk-dev:latest /opt/ /opt/
-COPY --from=floydcraft/cardano-node-iohk-dev:latest /scripts/entrypoint.sh /scripts/entrypoint.sh
-COPY --from=floydcraft/cardano-node-iohk-dev:latest /config/ /config/
+COPY --from=base /root/.cabal/bin/* /usr/local/bin/
+COPY --from=base /lib/x86_64-linux-gnu/lib* /lib/x86_64-linux-gnu/
+COPY --from=base /lib64/ld-linux-x86-64* /lib64/
+COPY --from=base /usr/lib/x86_64-linux-gnu/libgmp.* /usr/lib/x86_64-linux-gnu/
+COPY --from=base /usr/lib/x86_64-linux-gnu/liblz4.* /usr/lib/x86_64-linux-gnu/
+COPY --from=base /usr/lib/x86_64-linux-gnu/libsodium.* /usr/lib/x86_64-linux-gnu/
+COPY --from=base /opt/ /opt/
+COPY --from=base /scripts/entrypoint.sh /scripts/entrypoint.sh
+COPY --from=base /config/ /config/
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y ca-certificates libcap2-bin ncurses-bin iproute2 curl wget xz-utils netbase sudo coreutils dnsutils net-tools procps tcptraceroute bc \

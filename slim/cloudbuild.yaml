@@ -9,6 +9,7 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build',
+           '--build-arg', '_VERSION=$_VERSION',
            '--cache-from', 'floydcraft/$_CONTAINER:$_VERSION',
            '-t', 'floydcraft/$_CONTAINER:$COMMIT_SHA',
            '-t', 'floydcraft/$_CONTAINER:$_VERSION',
