@@ -23,15 +23,12 @@ COPY --from=base /usr/lib/x86_64-linux-gnu/libgmp.* /usr/lib/x86_64-linux-gnu/
 COPY --from=base /usr/lib/x86_64-linux-gnu/liblz4.* /usr/lib/x86_64-linux-gnu/
 COPY --from=base /usr/lib/x86_64-linux-gnu/libsodium.* /usr/lib/x86_64-linux-gnu/
 COPY --from=base /opt/ /opt/
-COPY --from=base /scripts/entrypoint.sh /scripts/entrypoint.sh
 COPY --from=base /config/ /config/
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y ca-certificates libcap2-bin ncurses-bin iproute2 curl wget xz-utils netbase sudo coreutils dnsutils net-tools procps tcptraceroute bc \
     && apt-get -y clean \
     && apt-get -y autoremove \
-    && rm -rf /var/lib/apt/lists/* \
-    && chmod +x scripts/entrypoint.sh
+    && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 3001 12798 12788
-ENTRYPOINT [ "scripts/entrypoint.sh" ]
+ENTRYPOINT [ "bin/bash" ]
