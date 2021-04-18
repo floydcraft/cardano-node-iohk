@@ -1,5 +1,5 @@
 substitutions:
-  _VERSION: 1.25.1 # default value
+  _VERSION: 1.26.2 # default value
   _CONTAINER: "cardano-node-iohk-slim"
 steps:
   - name: 'gcr.io/cloud-builders/docker'

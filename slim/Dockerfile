@@ -1,4 +1,4 @@
-ARG _VERSION=1.25.1
+ARG _VERSION=1.26.2
 FROM floydcraft/cardano-node-iohk-dev:$_VERSION as base
 
 FROM debian:buster-20210208-slim
