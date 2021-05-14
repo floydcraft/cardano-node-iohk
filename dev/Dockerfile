@@ -8,7 +8,7 @@ ENV APP=/opt/cardano-node \
     USER=root \
     PATH=$HOME/scripts:/root/.cabal/bin:/root/.ghcup/bin:$PATH
 
-ARG _VERSION=1.26.2
+ARG _VERSION=1.27.0
 
 ADD files .
 
