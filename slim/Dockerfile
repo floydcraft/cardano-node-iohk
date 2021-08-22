@@ -1,7 +1,7 @@
 ARG _VERSION=1.27.0
 FROM floydcraft/cardano-node-iohk-dev:$_VERSION as base
 
-FROM debian:buster-20210208-slim
+FROM debian:buster-slim
 LABEL maintainer="chbfiv@floydcraft.com"
 
 ARG DEBIAN_FRONTEND=noninteractive
